@@ -36,9 +36,32 @@ class Node(object):
 
     def delete(self, data):
         ''' For deleting the node '''
-        # Your code goes here
-        pass
+        if self is None:
+            return None
 
+        # if current node's data is less than that of root node, then only search in left subtree else right subtree
+        if data < self.data:
+            self.leftChild = self.leftChild.delete(data)
+        elif data > self.data:
+            self.rightChild = self.rightChild.delete(data)
+        else:
+            # deleting node with one child
+            if self.leftChild is None:
+                temp = self.rightChild
+                self = None
+                return temp
+            elif self.rightChild is None:
+                temp = self.leftChild
+                self = None
+                return temp
+
+            # deleting node with two children
+            # first get the inorder successor
+            temp = self.minimum(self.rightChild)
+            self.data = temp.data
+            self.rightChild = self.rightChild.delete(temp.data)
+
+        return self
 
     def find(self, data):
         ''' This function checks whether the specified data is in tree or not '''
@@ -57,8 +80,11 @@ class Node(object):
 
     def preorder(self):
         '''For preorder traversal of the BST '''
-        # Your code goes here
-        pass
+        print(str(self.data), end = ' ')
+        if self.leftChild:
+            self.leftChild.preorder()
+        if self.rightChild:
+            self.rightChild.preorder()
 
     def inorder(self):
         ''' For Inorder traversal of the BST '''
@@ -70,8 +96,7 @@ class Node(object):
 
     def postorder(self):
         ''' For postorder traversal of the BST '''
-        # Your code goes here
-        pass
+        # Add your code here
 
 class Tree(object):
     def __init__(self):
@@ -95,8 +120,10 @@ class Tree(object):
             return False
 
     def preorder(self):
-        # Your code goes here
-        pass
+        if self.root is not None:
+            print()
+            print('Preorder: ')
+            self.root.preorder()
 
     def inorder(self):
         print()
@@ -105,8 +132,10 @@ class Tree(object):
             self.root.inorder()
 
     def postorder(self):
-        # Your code goes here
-        pass
+        print()
+        if self.root is not None:
+            print('Postorder: ')
+            self.root.postorder()
 
 if __name__ == '__main__':
     tree = Tree()
