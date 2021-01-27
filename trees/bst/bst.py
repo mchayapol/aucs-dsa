@@ -8,22 +8,9 @@ class Node(object):
 
     def insert(self, data):
         ''' For inserting the data in the Tree '''
+        # Your code goes here
+        pass
 
-        if data < self.data:
-            ''' Data less than the root data is placed to the left of the root '''
-            if self.leftChild:
-                return self.leftChild.insert(data)
-            else:
-                self.leftChild = Node(data)
-                return True
-
-        else:
-            ''' Data greater than the root data is placed to the right of the root '''
-            if self.rightChild:
-                return self.rightChild.insert(data)
-            else:
-                self.rightChild = Node(data)
-                return True
 
     def minimum(self, node):
         current = node
